@@ -21,7 +21,7 @@ module VagrantPlugins
         @ip          = UNSET_VALUE
       end
 
-			def finalize!
+      def finalize!
         @enabled     = false         if @enabled     == UNSET_VALUE
         @path        = nil           if @path        == UNSET_VALUE
         @config_img  = "config.img"  if @config_img  == UNSET_VALUE
