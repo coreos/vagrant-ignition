@@ -1,35 +1,27 @@
 # Vagrant::Ignition
+This is a Vagrant plugin that generates and mounts gpt partitioned drive for Ignition to use. It is only designed to work with the Virtualbox provider for now.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/vagrant/ignition`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
+Build the app using:
 
-Add this line to your application's Gemfile:
+    $ gem build vagrant-ignition.gemspec
 
-```ruby
-gem 'vagrant-ignition'
-```
+And install it with:
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install vagrant-ignition
+    $ vagrant plugin install vagrant-ignition.gem
 
 ## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To use this app, you simply set a couple of config options in your Vagrantfile's config section.
+Options:
+`config.ignition.enabled: Simply set this to true to enable this plugin`
+`config.ignition.path: This must be set to the path of you base ignition config (this can be nil if you don't have a base)`
+`config.ignition.config_obj: This must be set equal to `config.vm.provider :virtualbox``
+`config.ignition.config_img: Where to store the generated image (optional)`
+`config.ignition.config_vmdk: Where to store the generated vmdk (optional)`
+`config.ignition.hostname: The hostname of your machine (optional)`
+`config.ignition.ip: The ip address to set eth1 equal to (this only applies if you're creating a private network as well)`
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/vagrant-ignition.
+Bug reports and pull requests are welcome on GitHub at https://github.com/coreos/vagrant-ignition.
