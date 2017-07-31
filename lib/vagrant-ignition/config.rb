@@ -23,7 +23,7 @@ module VagrantPlugins
         @enabled     = false         if @enabled     == UNSET_VALUE
         @path        = nil           if @path        == UNSET_VALUE
         @drive_name  = "config"      if @drive_name  == UNSET_VALUE
-        @drive_root  = "./"          if @drive_path  == UNSET_VALUE
+        @drive_root  = "./"          if @drive_root  == UNSET_VALUE
         @hostname    = nil           if @hostname    == UNSET_VALUE
         @ip          = nil           if @ip          == UNSET_VALUE
       end
