@@ -59,7 +59,7 @@ def merge_ignition(ignition_path, hostname, ip, env)
     config[:passwd][:users] += [ssh_entry()]
   end
 
-  File.open(ignition_path + ".merged","w") do |f|
+  File.open(ignition_path + ".merged","wb") do |f|
     f.write(config.to_json)
   end
 end

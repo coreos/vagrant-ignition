@@ -9,7 +9,7 @@ Build the app using:
 
 And install it with:
 
-    $ vagrant plugin install vagrant-ignition-0.0.1.gem
+    $ vagrant plugin install vagrant-ignition-0.0.2.gem
 
 ## Usage
 To use this plugin, a couple of config options must be set in a project's Vagrantfile config section.
@@ -22,9 +22,9 @@ Options:
 
 `config.ignition.config_obj`: Set equal to `config.vm.provider :virtualbox`
 
-`config.ignition.config_img`: Set to desired location of generated image (optional)
+`config.ignition.drive_root`: Set to desired root directory of generated config drive (optional)
 
-`config.ignition.config_vmdk`: Set to desired location of generated vmdk (optional)
+`config.ignition.drive_name`: Set to desired filename of generated config drive (optional)
 
 `config.ignition.hostname`: Set to desired hostname of the machine (optional)
 

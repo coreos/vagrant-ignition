@@ -4,8 +4,8 @@ module VagrantPlugins
       attr_accessor :enabled
       attr_accessor :path
       attr_accessor :config_obj
-      attr_accessor :config_img
-      attr_accessor :config_vmdk
+      attr_accessor :drive_name
+      attr_accessor :drive_root
       attr_accessor :hostname
       attr_accessor :ip
 
@@ -13,8 +13,8 @@ module VagrantPlugins
         @enabled     = UNSET_VALUE
         @path        = UNSET_VALUE
         @config_obj  = UNSET_VALUE
-        @config_img  = UNSET_VALUE
-        @config_vmdk = UNSET_VALUE
+        @drive_name  = UNSET_VALUE
+        @drive_root  = UNSET_VALUE
         @hostname    = UNSET_VALUE
         @ip          = UNSET_VALUE
       end
@@ -22,8 +22,8 @@ module VagrantPlugins
       def finalize!
         @enabled     = false         if @enabled     == UNSET_VALUE
         @path        = nil           if @path        == UNSET_VALUE
-        @config_img  = "config.img"  if @config_img  == UNSET_VALUE
-        @config_vmdk = "config.vmdk" if @config_vmdk == UNSET_VALUE
+        @drive_name  = "config"      if @drive_name  == UNSET_VALUE
+        @drive_root  = "./"          if @drive_path  == UNSET_VALUE
         @hostname    = nil           if @hostname    == UNSET_VALUE
         @ip          = nil           if @ip          == UNSET_VALUE
       end
