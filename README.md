@@ -9,7 +9,7 @@ Build the app using:
 
 And install it with:
 
-    $ vagrant plugin install vagrant-ignition-0.0.2.gem
+    $ vagrant plugin install vagrant-ignition-0.0.3.gem
 
 ## Usage
 To use this plugin, a couple of config options must be set in a project's Vagrantfile config section.
