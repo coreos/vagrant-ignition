@@ -2,6 +2,7 @@ module VagrantPlugins
   module Ignition
     class Config < Vagrant.plugin("2", :config)
       attr_accessor :enabled
+      attr_accessor :provider
       attr_accessor :path
       attr_accessor :config_obj
       attr_accessor :drive_name
@@ -11,6 +12,7 @@ module VagrantPlugins
 
       def initialize
         @enabled     = UNSET_VALUE
+        @provider    = UNSET_VALUE
         @path        = UNSET_VALUE
         @config_obj  = UNSET_VALUE
         @drive_name  = UNSET_VALUE
@@ -21,6 +23,7 @@ module VagrantPlugins
 
       def finalize!
         @enabled     = false         if @enabled     == UNSET_VALUE
+        @provider    = "virtualbox"  if @provider    == UNSET_VALUE
         @path        = nil           if @path        == UNSET_VALUE
         @drive_name  = "config"      if @drive_name  == UNSET_VALUE
         @drive_root  = "./"          if @drive_root  == UNSET_VALUE

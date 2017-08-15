@@ -8,8 +8,12 @@ def hostname_entry(hostname)
   {filesystem: "root", path: "/etc/hostname", contents: {source: "data:,%s" % hostname, verification: {}}, mode: 0644, user: {id: 0}, group: {id: 0}}
 end
 
-def ip_entry(ip)
+def virtualbox_ip_entry(ip)
   {name: "00-eth1.network", contents: "[Match]\nName=eth1\n\n[Network]\nAddress=%s" % ip}
+end
+
+def vmware_ip_entry(ip)
+  {name: "00-ens34.network", contents: "[Match]\nName=ens34\n\n[Network]\nAddress=%s" % ip}
 end
 
 # Vagrant insecure key
@@ -21,7 +25,7 @@ end
 
 HOSTNAME_REGEX = /^(?=.{1,255}$)[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?(?:\.[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?)*\.?$/
 
-def merge_ignition(ignition_path, hostname, ip, env)
+def merge_ignition(ignition_path, hostname, ip, env, provider)
   if !ignition_path.nil?
     ign_file = File.new(ignition_path, "rb")
     config = JSON.parse(File.read(ign_file), :symbolize_names => true)
@@ -42,11 +46,17 @@ def merge_ignition(ignition_path, hostname, ip, env)
     end
   end
 
-  # Handle eth1
+  # Handle networking
   if !ip.nil?
     config[:networkd] ||= {:units => []}
     config[:networkd][:units] ||= []
-    config[:networkd][:units] += [ip_entry(ip)]
+    if provider == "virtualbox"
+      config[:networkd][:units] += [virtualbox_ip_entry(ip)]
+    elsif provider == "vmware"
+      config[:networkd][:units] += [vmware_ip_entry(ip)]
+    else
+      env[:machine].ui.info "WARNING: Invalid config.ignition.provider; failed to configure networking"
+    end
   end
 
   # Handle ssh key
