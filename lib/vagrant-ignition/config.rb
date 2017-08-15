@@ -3,7 +3,6 @@ module VagrantPlugins
     class Config < Vagrant.plugin("2", :config)
       attr_accessor :enabled
       attr_accessor :path
-      attr_accessor :config_obj
       attr_accessor :drive_name
       attr_accessor :drive_root
       attr_accessor :hostname
@@ -12,7 +11,6 @@ module VagrantPlugins
       def initialize
         @enabled     = UNSET_VALUE
         @path        = UNSET_VALUE
-        @config_obj  = UNSET_VALUE
         @drive_name  = UNSET_VALUE
         @drive_root  = UNSET_VALUE
         @hostname    = UNSET_VALUE
