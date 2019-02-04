@@ -9,7 +9,7 @@ Build the app using:
 
 And install it with:
 
-    $ vagrant plugin install vagrant-ignition-0.0.3.gem
+    $ vagrant plugin install vagrant-ignition-0.0.4.gem
 
 ## Usage
 To use this plugin, a couple of config options must be set in a project's Vagrantfile config section.
@@ -29,6 +29,8 @@ Options:
 `config.ignition.hostname`: Set to desired hostname of the machine (optional)
 
 `config.ignition.ip`: Set to desired ip of eth1 (only applies if a private network is being created)
+
+`config.ignition.insert_insecure_key`: Set to false if you want to avoid inserting the Vagrant insecure key (you should add your own key, otherwise you won't be able to login via ssh)
 
 ## Contributing
 
