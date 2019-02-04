@@ -21,7 +21,7 @@ end
 
 HOSTNAME_REGEX = /^(?=.{1,255}$)[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?(?:\.[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?)*\.?$/
 
-def merge_ignition(ignition_path, hostname, ip, env)
+def merge_ignition(ignition_path, hostname, ip, env, insert_insecure_key)
   if !ignition_path.nil?
     ign_file = File.new(ignition_path, "rb")
     config = JSON.parse(File.read(ign_file), :symbolize_names => true)
@@ -50,13 +50,15 @@ def merge_ignition(ignition_path, hostname, ip, env)
   end
 
   # Handle ssh key
-  config[:passwd] ||= {:users => []}
-  config[:passwd][:users] ||= []
-  if config[:passwd][:users].select {|user| user[:name] == "core"} != []
-    config[:passwd][:users].select{|user| user[:name] == "core"}[0][:sshAuthorizedKeys] ||= []
-    config[:passwd][:users].select{|user| user[:name] == "core"}[0][:sshAuthorizedKeys] += [VAGRANT_INSECURE_KEY]
-  else
-    config[:passwd][:users] += [ssh_entry()]
+  if insert_insecure_key
+    config[:passwd] ||= {:users => []}
+    config[:passwd][:users] ||= []
+    if config[:passwd][:users].select {|user| user[:name] == "core"} != []
+      config[:passwd][:users].select{|user| user[:name] == "core"}[0][:sshAuthorizedKeys] ||= []
+      config[:passwd][:users].select{|user| user[:name] == "core"}[0][:sshAuthorizedKeys] += [VAGRANT_INSECURE_KEY]
+    else
+      config[:passwd][:users] += [ssh_entry()]
+    end
   end
 
   File.open(ignition_path + ".merged","wb") do |f|

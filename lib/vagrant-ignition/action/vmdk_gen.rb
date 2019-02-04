@@ -2,7 +2,7 @@
 require_relative 'merge_ignition'
 require_relative 'IgnitionDiskGenerator'
 
-def vmdk_gen(ignition_path, drive_name, drive_root, hostname, ip, env)
+def vmdk_gen(ignition_path, drive_name, drive_root, hostname, ip, env, insert_insecure_key)
   # This ensures changes the directory to the drive_root so the img and
   # vmdk can be generated in the same directory as well as avoid some
   # path name bugs
@@ -10,7 +10,7 @@ def vmdk_gen(ignition_path, drive_name, drive_root, hostname, ip, env)
   Dir.chdir(drive_root)
   vmdk_name = drive_name + ".vmdk"
   config_drive = drive_name + ".img"
-  merge_ignition(ignition_path, hostname, ip, env)
+  merge_ignition(ignition_path, hostname, ip, env, insert_insecure_key)
   if !ignition_path.nil?
     IgnitionDiskGenerator.create_disk(ignition_path + ".merged", config_drive)
   else

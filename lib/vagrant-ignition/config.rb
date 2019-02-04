@@ -8,24 +8,27 @@ module VagrantPlugins
       attr_accessor :drive_root
       attr_accessor :hostname
       attr_accessor :ip
+      attr_accessor :insert_insecure_key
 
       def initialize
-        @enabled     = UNSET_VALUE
-        @path        = UNSET_VALUE
-        @config_obj  = UNSET_VALUE
-        @drive_name  = UNSET_VALUE
-        @drive_root  = UNSET_VALUE
-        @hostname    = UNSET_VALUE
-        @ip          = UNSET_VALUE
+        @enabled              = UNSET_VALUE
+        @path                 = UNSET_VALUE
+        @config_obj           = UNSET_VALUE
+        @drive_name           = UNSET_VALUE
+        @drive_root           = UNSET_VALUE
+        @hostname             = UNSET_VALUE
+        @ip                   = UNSET_VALUE
+        @insert_insecure_key  = UNSET_VALUE
       end
 
       def finalize!
-        @enabled     = false         if @enabled     == UNSET_VALUE
-        @path        = nil           if @path        == UNSET_VALUE
-        @drive_name  = "config"      if @drive_name  == UNSET_VALUE
-        @drive_root  = "./"          if @drive_root  == UNSET_VALUE
-        @hostname    = nil           if @hostname    == UNSET_VALUE
-        @ip          = nil           if @ip          == UNSET_VALUE
+        @enabled              = false         if @enabled             == UNSET_VALUE
+        @path                 = nil           if @path                == UNSET_VALUE
+        @drive_name           = "config"      if @drive_name          == UNSET_VALUE
+        @drive_root           = "./"          if @drive_root          == UNSET_VALUE
+        @hostname             = nil           if @hostname            == UNSET_VALUE
+        @ip                   = nil           if @ip                  == UNSET_VALUE
+        @insert_insecure_key  = true          if @insert_insecure_key == UNSET_VALUE
       end
     end
   end

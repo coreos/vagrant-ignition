@@ -5,7 +5,7 @@ require "vagrant-ignition/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "vagrant-ignition"
-  spec.version       = "0.0.3"
+  spec.version       = "0.0.4"
   spec.authors       = ["Alexander Pavel", "Alex Crawford"]
   spec.email         = ["alex.pavel@coreos.com", "alex.crawford@coreos.com"]
 
